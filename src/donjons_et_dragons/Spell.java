@@ -9,6 +9,10 @@ public class Spell {
 		this.spellAttackForce = scSpellAttackForce;
 	}
 	
+	public String toString() {
+		return spellName + " " + spellAttackForce;
+	}
+	
 	// ********** getters **********
 
 	public int getSpellAttackForce() {
@@ -23,5 +27,9 @@ public class Spell {
 	
 	public void setSpellName(String pSpellName) {
 		spellName = pSpellName;
+	}
+	
+	public void setSpellAttackForce(Integer pSpellAttackForce) {
+		spellAttackForce = pSpellAttackForce;
 	}
 }

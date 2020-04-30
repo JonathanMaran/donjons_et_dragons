@@ -5,7 +5,7 @@ public class Warrior {
 	int healthPoints;
 	int attackForce;
 	String shield;
-
+	Weapon weapon;
 
 	// ********** getters **********
 
@@ -24,6 +24,11 @@ public class Warrior {
 	public String getShieldWarrior() {
 		return shield;
 	}
+	
+	//retourne l'objet Weapon
+	public Weapon getWeaponWarrior() {
+		return weapon;
+	}
 
 	// ********** setters **********
 
@@ -41,5 +46,19 @@ public class Warrior {
 
 	public void setShieldWarrior(String pShield) {
 		shield = pShield;
+	}
+	
+	public void setWeaponWarrior(Weapon pWeapon) {
+		weapon = pWeapon;
+	}
+	
+	//constructeur (new)
+	public Warrior(String scName, Integer scHealthPoints, Integer scAttackForce, String scShield, String scWeaponName, Integer scWeaponAttackForce) {
+		this.name = scName;
+		this.healthPoints = scHealthPoints;
+		this.attackForce = scAttackForce;
+		this.shield = scShield;
+		this.weapon = new Weapon(scWeaponName, scWeaponAttackForce) ;
+		
 	}
 }
