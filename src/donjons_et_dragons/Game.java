@@ -4,44 +4,93 @@ import java.util.*;
 
 public class Game {
 
+
 	//point d'entrée de l'application
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez saisir un personnage... Vous êtes plus 'Guerrier' ou 'Magicien' ? : ");
-		String characterType = sc.nextLine();
+		// variable permettant de rester dans la boucle de création de perso
+		String createNewCharacter = "oui";
+		Object charTab[] = new Object[10];
 
-		while(!characterType.equalsIgnoreCase("Guerrier") && !characterType.equalsIgnoreCase("Magicien")) {
-			System.out.println("Aie ! Vous devez choisir un personnage disponible entre 'Guerrier' et 'Magicien' ! : ");
-			characterType = sc.nextLine();
+		int counterChar = 0;
+
+		while(createNewCharacter.equalsIgnoreCase("oui")) {
+
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Veuillez saisir un personnage... Vous êtes plus 'Guerrier' ou 'Magicien' ? : ");
+			String characterType = sc.nextLine();
+
+			while(!characterType.equalsIgnoreCase("Guerrier") && !characterType.equalsIgnoreCase("Magicien")) {
+				System.out.println("Aie ! Vous devez choisir un personnage disponible entre 'Guerrier' et 'Magicien' ! : ");
+				characterType = sc.nextLine();
+			}
+
+			System.out.println("Vous avez choisi d'incarner un " + characterType + " !");
+			System.out.println(" ");
+
+			if(characterType.equalsIgnoreCase("Guerrier")) {
+
+				Warrior newWarrior = createWarrior(sc);
+
+				System.out.println(" ");
+				System.out.println("Souhaitez-vous enregistrer votre personnage ? oui / non: ");
+				String saveChar = sc.nextLine();
+				if(saveChar.equalsIgnoreCase("oui") && characterType.equalsIgnoreCase("Guerrier")) {
+
+					charTab[counterChar] = newWarrior;
+
+					counterChar++;
+				}
+
+				//counter va pouvoir déterminer le nombre de personnages, qui ont été créé,à afficher
+				int counterPrint = 0; 
+				while(counterPrint < counterChar ) {
+					System.out.println(charTab[counterPrint]);
+					counterPrint++;
+				}
+
+			} else {
+
+				Magician newMagician = createMagician(sc);
+
+				System.out.println(" ");
+				System.out.println("Souhaitez-vous enregistrer votre personnage ? oui / non: ");
+				String saveChar = sc.nextLine();
+				if(saveChar.equalsIgnoreCase("oui") && characterType.equalsIgnoreCase("Magicien")) {
+
+					charTab[counterChar] = newMagician;
+
+					counterChar++;
+				}
+
+				//counter va pouvoir déterminer le nombre de personnages, qui ont été créé,à afficher
+				int counterPrint = 0; 
+				while(counterPrint < counterChar ) {
+					System.out.println(charTab[counterPrint]);
+					counterPrint++;
+				}
+				// ou comme cela pour instancier
+				//new Game().createMagician(sc);
+
+			}
+
+
+			//question recréation perso
+			System.out.println(" ");
+			System.out.println("******************************************");
+
+			System.out.println(" ");
+			System.out.println("Souhaitez-vous créer un nouveau personnage ? oui / non: ");
+			createNewCharacter = sc.nextLine();
 		}
-
-		System.out.println("Vous avez choisi d'incarner un " + characterType + " !");
+		
 		System.out.println(" ");
-
-		if(characterType.equalsIgnoreCase("Guerrier")) {
-			
-			Game newWarrior = new Game();
-			newWarrior.createWarrior(sc);
-				
-
-		} else {
-			
-			Game newMagician = new Game();
-			newMagician.createMagician(sc);
-
-			// ou comme cela pour instancier
-			//new Game().createMagician(sc);
-
-		}
-
 		System.out.println("******************************************");
-
+		System.out.println("FIN DU JEU");
+		System.out.println("******************************************");
 	}
 
-
-
-	private void createMagician(Scanner sc) {
+	private static Magician createMagician(Scanner sc) {
 
 		//choix du nom
 		System.out.println("Maintenant, il va falloir choisir votre nom : ");
@@ -50,7 +99,7 @@ public class Game {
 
 		System.out.println("Sympa " + scName + " comme nom !");
 		System.out.println(" ");
-		
+
 		//choix de l'image
 		System.out.println("Choisissez un nom d'image: ");
 		String scImg = sc.nextLine();
@@ -110,7 +159,7 @@ public class Game {
 			System.out.println("Points de vie: " + magician.getHealthPoints());
 			System.out.println("Force d'attaque: " + magician.getAttackForce());
 			System.out.println("Nom du philtre: " + magician.getPhilter());
-			System.out.println("Nom du sort et sa force: " + magician.getSpell().toString());
+			System.out.println("Nom du sort et sa force: " + magician.getSpell());
 
 			System.out.println(" ");
 
@@ -123,6 +172,9 @@ public class Game {
 				System.out.println("Nouveau nom:");
 				magician.setName(sc.nextLine());  
 				System.out.println(" ");
+				System.out.println("Nouveau nom d'image:");
+				magician.setImg(sc.nextLine());  
+				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 3 et 6:");
 				magician.setHealthPoints(sc.nextInt());
 				System.out.println(" ");
@@ -153,10 +205,11 @@ public class Game {
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
 				System.out.println("Nom: " + magician.getName());
+				System.out.println("Nom de l'image: " + magician.getImg());
 				System.out.println("Points de vie: " + magician.getHealthPoints());
 				System.out.println("Force d'attaque: " + magician.getAttackForce());
 				System.out.println("Nom du philtre: " + magician.getPhilter());
-				System.out.println("Nom du sort et sa force: " + magician.getSpell().toString());
+				System.out.println("Nom du sort et sa force: " + magician.getSpell());
 			}
 		} else if(getPlayer.equalsIgnoreCase("non")){
 			System.out.println("Souhaitez-vous modifier votre personnage ? oui / non:");
@@ -168,6 +221,9 @@ public class Game {
 				System.out.println("Nouveau nom:");
 				magician.setName(sc.nextLine());  
 				System.out.println(" ");
+				System.out.println("Nouveau nom d'image:");
+				magician.setImg(sc.nextLine());  
+				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 3 et 6:");
 				magician.setHealthPoints(sc.nextInt());
 				System.out.println(" ");
@@ -198,25 +254,24 @@ public class Game {
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
 				System.out.println("Nom: " + magician.getName());
+				System.out.println("Nom de l'image: " + magician.getImg());
 				System.out.println("Points de vie: " + magician.getHealthPoints());
 				System.out.println("Force d'attaque: " + magician.getAttackForce());
 				System.out.println("Nom du philtre: " + magician.getPhilter());
-				System.out.println("Nom du sort et sa force: " + magician.getSpell().toString());
+				System.out.println("Nom du sort et sa force: " + magician.getSpell());
 			} 
+
 		}
-
-		System.out.println(" ");
-		System.out.println("Souhaitez-vous enregistrer votre personnage ? oui / non: ");
-
-		System.out.println(" ");
-		System.out.println("Souhaitez-vous : 1. créer un nouveau personnage 2. arrêter là ? saisissez 1 ou 2 :");
+		
+		return magician;
+		
 	}
 
 
 
 
 
-	private void createWarrior(Scanner sc) {
+	private static Warrior createWarrior(Scanner sc) {
 
 		//choix du nom
 		System.out.println("Maintenant, il va falloir choisir votre nom : ");
@@ -225,14 +280,14 @@ public class Game {
 
 		System.out.println("Sympa " + scName + " comme nom !");
 		System.out.println(" ");
-		
-		//choix de l'image
-				System.out.println("Choisissez un nom d'image: ");
-				String scImg = sc.nextLine();
-				System.out.println(" ");
 
-				System.out.println("Votre nom d'image est donc: " + scImg);
-				System.out.println(" ");
+		//choix de l'image
+		System.out.println("Choisissez un nom d'image: ");
+		String scImg = sc.nextLine();
+		System.out.println(" ");
+
+		System.out.println("Votre nom d'image est donc: " + scImg);
+		System.out.println(" ");
 
 		//choix du niveau de vie
 		System.out.println(scName + ", vous allez devoir établir votre niveau de vie, qui se situera obligatoirement entre 5 et 10 : ");
@@ -281,10 +336,11 @@ public class Game {
 		if(getPlayer.equalsIgnoreCase("oui")) {
 			System.out.println(" ");
 			System.out.println("Nom: " + warrior.getName());
+			System.out.println("Nom de l'image: " + warrior.getImg());
 			System.out.println("Points de vie: " + warrior.getHealthPoints());
 			System.out.println("Force d'attaque: " + warrior.getAttackForce());
 			System.out.println("Nom du bouclier: " + warrior.getShield());
-			System.out.println("Nom de l'arme et sa force: " + warrior.getWeapon().toString());
+			System.out.println("Nom de l'arme et sa force: " + warrior.getWeapon());
 
 			System.out.println(" ");
 
@@ -296,6 +352,9 @@ public class Game {
 				System.out.println(" ");
 				System.out.println("Nouveau nom:");
 				warrior.setName(sc.nextLine());  
+				System.out.println(" ");
+				System.out.println("Nouveau nom d'image:");
+				warrior.setImg(sc.nextLine());  
 				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 5 et 10:");
 				warrior.setHealthPoints(sc.nextInt());
@@ -327,10 +386,11 @@ public class Game {
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
 				System.out.println("Nom: " + warrior.getName());
+				System.out.println("Nom de l'image: " + warrior.getImg());
 				System.out.println("Points de vie: " + warrior.getHealthPoints());
 				System.out.println("Force d'attaque: " + warrior.getAttackForce());
 				System.out.println("Nom du bouclier: " + warrior.getShield());
-				System.out.println("Nom d'arme et sa force: " + warrior.getWeapon().toString());
+				System.out.println("Nom d'arme et sa force: " + warrior.getWeapon());
 			}
 		} else if(getPlayer.equalsIgnoreCase("non")){
 			System.out.println("Souhaitez-vous modifier votre personnage ? oui / non:");
@@ -341,6 +401,9 @@ public class Game {
 				System.out.println(" ");
 				System.out.println("Nouveau nom:");
 				warrior.setName(sc.nextLine());  
+				System.out.println(" ");
+				System.out.println("Nouveau nom d'image:");
+				warrior.setImg(sc.nextLine());  
 				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 5 et 10:");
 				warrior.setHealthPoints(sc.nextInt());
@@ -372,18 +435,15 @@ public class Game {
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
 				System.out.println("Nom: " + warrior.getName());
+				System.out.println("Nom de l'image: " + warrior.getImg());
 				System.out.println("Points de vie: " + warrior.getHealthPoints());
 				System.out.println("Force d'attaque: " + warrior.getAttackForce());
 				System.out.println("Nom du bouclier: " + warrior.getShield());
-				System.out.println("Nom de l'arme et sa force: " + warrior.getWeapon().toString());
+				System.out.println("Nom de l'arme et sa force: " + warrior.getWeapon());
+
 			} 
 		}
-
-		System.out.println(" ");
-		System.out.println("Souhaitez-vous enregistrer votre personnage ? oui / non: ");
-
-		System.out.println(" ");
-		System.out.println("Souhaitez-vous : 1. créer un nouveau personnage 2. arrêter là ? saisissez 1 ou 2 :");
+		return warrior;
 	}
 }
 

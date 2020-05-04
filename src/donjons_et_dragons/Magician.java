@@ -11,11 +11,16 @@ public class Magician {
 	//constructeur (new)
 	public Magician(String scName, String scImg, Integer scHealthPoints, Integer scAttackForce, String scPhilter, String scSpellName, Integer scSpellAttackForce) {
 		this.name = scName;
+		this.img = scImg;
 		this.healthPoints = scHealthPoints;
 		this.attackForce = scAttackForce;
 		this.philter = scPhilter;
 		this.spell = new Spell(scSpellName, scSpellAttackForce) ;
 
+	}
+	
+	public String toString() {
+		return "Nom:" + name + ", Nom de l'image: " + img + ", Nombre de points de vie: " + healthPoints+ ", Force d'attaque: " + attackForce+ ", Nom du philtre: " + philter + ", puis le sort et sa force: " + spell;
 	}
 
 	// ********** getters **********

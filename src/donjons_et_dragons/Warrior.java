@@ -7,23 +7,28 @@ public class Warrior {
 	private int attackForce;
 	private String shield;
 	Weapon weapon;
-	
+
 	//constructeur (new)
-		public Warrior(String scName, String scImg, Integer scHealthPoints, Integer scAttackForce, String scShield, String scWeaponName, Integer scWeaponAttackForce) {
-			this.name = scName;
-			this.healthPoints = scHealthPoints;
-			this.attackForce = scAttackForce;
-			this.shield = scShield;
-			this.weapon = new Weapon(scWeaponName, scWeaponAttackForce) ;
-			
-		}
+	public Warrior(String scName, String scImg, Integer scHealthPoints, Integer scAttackForce, String scShield, String scWeaponName, Integer scWeaponAttackForce) {
+		this.name = scName;
+		this.img = scImg;
+		this.healthPoints = scHealthPoints;
+		this.attackForce = scAttackForce;
+		this.shield = scShield;
+		this.weapon = new Weapon(scWeaponName, scWeaponAttackForce) ;
+
+	}
+
+	public String toString() {
+		return "Nom:" + name + ", Nom de l'image: " + img + ", Nombre de points de vie: " + healthPoints+ ", Force d'attaque: " + attackForce+ ", Nom du Bouclier: " + shield+ ", puis l'arme et sa force: " + weapon;
+	}
 
 	// ********** getters **********
 
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getImg() {
 		return img;
 	}
@@ -39,7 +44,7 @@ public class Warrior {
 	public String getShield() {
 		return shield;
 	}
-	
+
 	//retourne l'objet Weapon
 	public Weapon getWeapon() {
 		return weapon;
@@ -54,7 +59,7 @@ public class Warrior {
 	public void setImg(String pImg) {
 		img = pImg;
 	}
-	
+
 	public void setHealthPoints(int pHealthPoints) {
 		healthPoints = pHealthPoints;
 	}
@@ -66,10 +71,10 @@ public class Warrior {
 	public void setShield(String pShield) {
 		shield = pShield;
 	}
-	
+
 	public void setWeapon(Weapon pWeapon) {
 		weapon = pWeapon;
 	}
 
-	
+
 }
