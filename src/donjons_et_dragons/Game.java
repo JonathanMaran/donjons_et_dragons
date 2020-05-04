@@ -20,12 +20,18 @@ public class Game {
 		System.out.println(" ");
 
 		if(characterType.equalsIgnoreCase("Guerrier")) {
-
-			createWarrior(sc);	
+			
+			Game newWarrior = new Game();
+			newWarrior.createWarrior(sc);
+				
 
 		} else {
+			
+			Game newMagician = new Game();
+			newMagician.createMagician(sc);
 
-			createMagician(sc);
+			// ou comme cela pour instancier
+			//new Game().createMagician(sc);
 
 		}
 
@@ -35,7 +41,7 @@ public class Game {
 
 
 
-	private static void createMagician(Scanner sc) {
+	private void createMagician(Scanner sc) {
 
 		//choix du nom
 		System.out.println("Maintenant, il va falloir choisir votre nom : ");
@@ -43,6 +49,14 @@ public class Game {
 		System.out.println(" ");
 
 		System.out.println("Sympa " + scName + " comme nom !");
+		System.out.println(" ");
+		
+		//choix de l'image
+		System.out.println("Choisissez un nom d'image: ");
+		String scImg = sc.nextLine();
+		System.out.println(" ");
+
+		System.out.println("Votre nom d'image est donc: " + scImg);
 		System.out.println(" ");
 
 		//choix du niveau de vie
@@ -83,7 +97,7 @@ public class Game {
 		String scPhilter = sc.nextLine();
 		System.out.println(scPhilter + ", c'est PARFAIT ! Vous voilà prêt à partir au combat !");
 
-		Magician magician = new Magician(scName, scHealthPoints, scAttackForce, scPhilter, scSpellName, scSpellAttackForce); 
+		Magician magician = new Magician(scName, scImg, scHealthPoints, scAttackForce, scPhilter, scSpellName, scSpellAttackForce); 
 
 		System.out.println(" ");
 
@@ -91,11 +105,12 @@ public class Game {
 		String getPlayer = sc.nextLine();
 		if(getPlayer.equalsIgnoreCase("oui")) {
 			System.out.println(" ");
-			System.out.println("Nom: " + magician.getNameMagician());
-			System.out.println("Points de vie: " + magician.getHealthPointsMagician());
-			System.out.println("Force d'attaque: " + magician.getAttackForceMagician());
-			System.out.println("Nom du philtre: " + magician.getPhilterMagician());
-			System.out.println("Nom du sort et sa force: " + magician.getSpellMagician().toString());
+			System.out.println("Nom: " + magician.getName());
+			System.out.println("Nom de l'image: " + magician.getImg());
+			System.out.println("Points de vie: " + magician.getHealthPoints());
+			System.out.println("Force d'attaque: " + magician.getAttackForce());
+			System.out.println("Nom du philtre: " + magician.getPhilter());
+			System.out.println("Nom du sort et sa force: " + magician.getSpell().toString());
 
 			System.out.println(" ");
 
@@ -106,42 +121,42 @@ public class Game {
 				System.out.println("Par ici les modifications !");
 				System.out.println(" ");
 				System.out.println("Nouveau nom:");
-				magician.setNameMagician(sc.nextLine());  
+				magician.setName(sc.nextLine());  
 				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 3 et 6:");
-				magician.setHealthPointsMagician(sc.nextInt());
+				magician.setHealthPoints(sc.nextInt());
 				System.out.println(" ");
-				while(magician.getHealthPointsMagician() < 3 || magician.getHealthPointsMagician() > 6 ) {
+				while(magician.getHealthPoints() < 3 || magician.getHealthPoints() > 6 ) {
 					System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre 3 et 6 : ");
-					magician.setHealthPointsMagician(sc.nextInt());
+					magician.setHealthPoints(sc.nextInt());
 					System.out.println(" ");
 				}
 				System.out.println("Nouvelle force d'attaque entre 8 et 15:");
-				magician.setAttackForceMagician(sc.nextInt());
+				magician.setAttackForce(sc.nextInt());
 				System.out.println(" ");
-				while(magician.getAttackForceMagician() < 8 || magician.getAttackForceMagician() > 15 ) {
+				while(magician.getAttackForce() < 8 || magician.getAttackForce() > 15 ) {
 					System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 8 et 15 : ");
-					magician.setAttackForceMagician(sc.nextInt());
+					magician.setAttackForce(sc.nextInt());
 					System.out.println(" ");
 				}
 				sc.nextLine();
 				System.out.println("Nouveau nom de philtre:");
-				magician.setPhilterMagician(sc.nextLine());
+				magician.setPhilter(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouveau nom de sort:");
-				magician.spell.setSpellName(sc.nextLine());
+				magician.spell.setName(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouvelle puissance du sort:");
-				magician.spell.setSpellAttackForce(sc.nextInt());
+				magician.spell.setAttackForce(sc.nextInt());
 				System.out.println(" ");
 
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
-				System.out.println("Nom: " + magician.getNameMagician());
-				System.out.println("Points de vie: " + magician.getHealthPointsMagician());
-				System.out.println("Force d'attaque: " + magician.getAttackForceMagician());
-				System.out.println("Nom du philtre: " + magician.getPhilterMagician());
-				System.out.println("Nom du sort et sa force: " + magician.getSpellMagician().toString());
+				System.out.println("Nom: " + magician.getName());
+				System.out.println("Points de vie: " + magician.getHealthPoints());
+				System.out.println("Force d'attaque: " + magician.getAttackForce());
+				System.out.println("Nom du philtre: " + magician.getPhilter());
+				System.out.println("Nom du sort et sa force: " + magician.getSpell().toString());
 			}
 		} else if(getPlayer.equalsIgnoreCase("non")){
 			System.out.println("Souhaitez-vous modifier votre personnage ? oui / non:");
@@ -151,42 +166,42 @@ public class Game {
 				System.out.println("Par ici les modifications !");
 				System.out.println(" ");
 				System.out.println("Nouveau nom:");
-				magician.setNameMagician(sc.nextLine());  
+				magician.setName(sc.nextLine());  
 				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 3 et 6:");
-				magician.setHealthPointsMagician(sc.nextInt());
+				magician.setHealthPoints(sc.nextInt());
 				System.out.println(" ");
-				while(magician.getHealthPointsMagician() < 3 || magician.getHealthPointsMagician() > 6 ) {
+				while(magician.getHealthPoints() < 3 || magician.getHealthPoints() > 6 ) {
 					System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre 3 et 6 : ");
-					magician.setHealthPointsMagician(sc.nextInt());
+					magician.setHealthPoints(sc.nextInt());
 					System.out.println(" ");
 				}
 				System.out.println("Nouvelle force d'attaque entre 8 et 15:");
-				magician.setAttackForceMagician(sc.nextInt());
+				magician.setAttackForce(sc.nextInt());
 				System.out.println(" ");
-				while(magician.getAttackForceMagician() < 8 || magician.getAttackForceMagician() > 15 ) {
+				while(magician.getAttackForce() < 8 || magician.getAttackForce() > 15 ) {
 					System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 8 et 15 : ");
-					magician.setAttackForceMagician(sc.nextInt());
+					magician.setAttackForce(sc.nextInt());
 					System.out.println(" ");
 				}
 				sc.nextLine();
 				System.out.println("Nouveau nom de philtre:");
-				magician.setPhilterMagician(sc.nextLine());
+				magician.setPhilter(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouveau nom de sort:");
-				magician.spell.setSpellName(sc.nextLine());
+				magician.spell.setName(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouvelle puissance du sort:");
-				magician.spell.setSpellAttackForce(sc.nextInt());
+				magician.spell.setAttackForce(sc.nextInt());
 				System.out.println(" ");
 
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
-				System.out.println("Nom: " + magician.getNameMagician());
-				System.out.println("Points de vie: " + magician.getHealthPointsMagician());
-				System.out.println("Force d'attaque: " + magician.getAttackForceMagician());
-				System.out.println("Nom du philtre: " + magician.getPhilterMagician());
-				System.out.println("Nom du sort et sa force: " + magician.getSpellMagician().toString());
+				System.out.println("Nom: " + magician.getName());
+				System.out.println("Points de vie: " + magician.getHealthPoints());
+				System.out.println("Force d'attaque: " + magician.getAttackForce());
+				System.out.println("Nom du philtre: " + magician.getPhilter());
+				System.out.println("Nom du sort et sa force: " + magician.getSpell().toString());
 			} 
 		}
 
@@ -201,7 +216,7 @@ public class Game {
 
 
 
-	private static void createWarrior(Scanner sc) {
+	private void createWarrior(Scanner sc) {
 
 		//choix du nom
 		System.out.println("Maintenant, il va falloir choisir votre nom : ");
@@ -210,6 +225,14 @@ public class Game {
 
 		System.out.println("Sympa " + scName + " comme nom !");
 		System.out.println(" ");
+		
+		//choix de l'image
+				System.out.println("Choisissez un nom d'image: ");
+				String scImg = sc.nextLine();
+				System.out.println(" ");
+
+				System.out.println("Votre nom d'image est donc: " + scImg);
+				System.out.println(" ");
 
 		//choix du niveau de vie
 		System.out.println(scName + ", vous allez devoir établir votre niveau de vie, qui se situera obligatoirement entre 5 et 10 : ");
@@ -249,7 +272,7 @@ public class Game {
 		String scShield = sc.nextLine();
 		System.out.println(scShield + ", c'est PARFAIT ! Vous voilà prêt à partir au combat !");
 
-		Warrior warrior = new Warrior(scName, scHealthPoints, scAttackForce, scShield, scWeaponName, scWeaponAttackForce); 
+		Warrior warrior = new Warrior(scName, scImg, scHealthPoints, scAttackForce, scShield, scWeaponName, scWeaponAttackForce); 
 
 		System.out.println(" ");
 
@@ -257,11 +280,11 @@ public class Game {
 		String getPlayer = sc.nextLine();
 		if(getPlayer.equalsIgnoreCase("oui")) {
 			System.out.println(" ");
-			System.out.println("Nom: " + warrior.getNameWarrior());
-			System.out.println("Points de vie: " + warrior.getHealthPointsWarrior());
-			System.out.println("Force d'attaque: " + warrior.getAttackForceWarrior());
-			System.out.println("Nom du bouclier: " + warrior.getShieldWarrior());
-			System.out.println("Nom de l'arme et sa force: " + warrior.getWeaponWarrior().toString());
+			System.out.println("Nom: " + warrior.getName());
+			System.out.println("Points de vie: " + warrior.getHealthPoints());
+			System.out.println("Force d'attaque: " + warrior.getAttackForce());
+			System.out.println("Nom du bouclier: " + warrior.getShield());
+			System.out.println("Nom de l'arme et sa force: " + warrior.getWeapon().toString());
 
 			System.out.println(" ");
 
@@ -272,42 +295,42 @@ public class Game {
 				System.out.println("Par ici les modifications !");
 				System.out.println(" ");
 				System.out.println("Nouveau nom:");
-				warrior.setNameWarrior(sc.nextLine());  
+				warrior.setName(sc.nextLine());  
 				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 5 et 10:");
-				warrior.setHealthPointsWarrior(sc.nextInt());
+				warrior.setHealthPoints(sc.nextInt());
 				System.out.println(" ");
-				while(warrior.getHealthPointsWarrior() < 5 || warrior.getHealthPointsWarrior() > 10 ) {
+				while(warrior.getHealthPoints() < 5 || warrior.getHealthPoints() > 10 ) {
 					System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre 5 et 10 : ");
-					warrior.setHealthPointsWarrior(sc.nextInt());
+					warrior.setHealthPoints(sc.nextInt());
 					System.out.println(" ");
 				}
 				System.out.println("Nouvelle force d'attaque entre 5 et 10:");
-				warrior.setAttackForceWarrior(sc.nextInt());
+				warrior.setAttackForce(sc.nextInt());
 				System.out.println(" ");
-				while(warrior.getAttackForceWarrior() < 5 || warrior.getAttackForceWarrior() > 10 ) {
+				while(warrior.getAttackForce() < 5 || warrior.getAttackForce() > 10 ) {
 					System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 5 et 10 : ");
-					warrior.setAttackForceWarrior(sc.nextInt());
+					warrior.setAttackForce(sc.nextInt());
 					System.out.println(" ");
 				}
 				sc.nextLine();
 				System.out.println("Nouveau nom de bouclier:");
-				warrior.setShieldWarrior(sc.nextLine());
+				warrior.setShield(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouveau nom d'arme:");
-				warrior.weapon.setWeaponName(sc.nextLine());
+				warrior.weapon.setName(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouvelle puissance du sort:");
-				warrior.weapon.setWeaponAttackForce(sc.nextInt());
+				warrior.weapon.setAttackForce(sc.nextInt());
 				System.out.println(" ");
 
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
-				System.out.println("Nom: " + warrior.getNameWarrior());
-				System.out.println("Points de vie: " + warrior.getHealthPointsWarrior());
-				System.out.println("Force d'attaque: " + warrior.getAttackForceWarrior());
-				System.out.println("Nom du bouclier: " + warrior.getShieldWarrior());
-				System.out.println("Nom d'arme et sa force: " + warrior.getWeaponWarrior().toString());
+				System.out.println("Nom: " + warrior.getName());
+				System.out.println("Points de vie: " + warrior.getHealthPoints());
+				System.out.println("Force d'attaque: " + warrior.getAttackForce());
+				System.out.println("Nom du bouclier: " + warrior.getShield());
+				System.out.println("Nom d'arme et sa force: " + warrior.getWeapon().toString());
 			}
 		} else if(getPlayer.equalsIgnoreCase("non")){
 			System.out.println("Souhaitez-vous modifier votre personnage ? oui / non:");
@@ -317,42 +340,42 @@ public class Game {
 				System.out.println("Par ici les modifications !");
 				System.out.println(" ");
 				System.out.println("Nouveau nom:");
-				warrior.setNameWarrior(sc.nextLine());  
+				warrior.setName(sc.nextLine());  
 				System.out.println(" ");
 				System.out.println("Nouveaux points de vie entre 5 et 10:");
-				warrior.setHealthPointsWarrior(sc.nextInt());
+				warrior.setHealthPoints(sc.nextInt());
 				System.out.println(" ");
-				while(warrior.getHealthPointsWarrior() < 5 || warrior.getHealthPointsWarrior() > 10 ) {
+				while(warrior.getHealthPoints() < 5 || warrior.getHealthPoints() > 10 ) {
 					System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre 5 et 10 : ");
-					warrior.setHealthPointsWarrior(sc.nextInt());
+					warrior.setHealthPoints(sc.nextInt());
 					System.out.println(" ");
 				}
 				System.out.println("Nouvelle force d'attaque entre 5 et 10:");
-				warrior.setAttackForceWarrior(sc.nextInt());
+				warrior.setAttackForce(sc.nextInt());
 				System.out.println(" ");
-				while(warrior.getAttackForceWarrior() < 5 || warrior.getAttackForceWarrior() > 10 ) {
+				while(warrior.getAttackForce() < 5 || warrior.getAttackForce() > 10 ) {
 					System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 5 et 10 : ");
-					warrior.setAttackForceWarrior(sc.nextInt());
+					warrior.setAttackForce(sc.nextInt());
 					System.out.println(" ");
 				}
 				sc.nextLine();
 				System.out.println("Nouveau nom du bouclier:");
-				warrior.setShieldWarrior(sc.nextLine());
+				warrior.setShield(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouveau nom d'arme:");
-				warrior.weapon.setWeaponName(sc.nextLine());
+				warrior.weapon.setName(sc.nextLine());
 				System.out.println(" ");
 				System.out.println("Nouvelle puissance de l'arme:");
-				warrior.weapon.setWeaponAttackForce(sc.nextInt());
+				warrior.weapon.setAttackForce(sc.nextInt());
 				System.out.println(" ");
 
 				System.out.println("Voici votre nouveau personnage mis à jour:");
 				System.out.println(" ");
-				System.out.println("Nom: " + warrior.getNameWarrior());
-				System.out.println("Points de vie: " + warrior.getHealthPointsWarrior());
-				System.out.println("Force d'attaque: " + warrior.getAttackForceWarrior());
-				System.out.println("Nom du bouclier: " + warrior.getShieldWarrior());
-				System.out.println("Nom de l'arme et sa force: " + warrior.getWeaponWarrior().toString());
+				System.out.println("Nom: " + warrior.getName());
+				System.out.println("Points de vie: " + warrior.getHealthPoints());
+				System.out.println("Force d'attaque: " + warrior.getAttackForce());
+				System.out.println("Nom du bouclier: " + warrior.getShield());
+				System.out.println("Nom de l'arme et sa force: " + warrior.getWeapon().toString());
 			} 
 		}
 

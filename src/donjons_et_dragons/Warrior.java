@@ -1,64 +1,75 @@
 package donjons_et_dragons;
 
 public class Warrior {
-	String name;
-	int healthPoints;
-	int attackForce;
-	String shield;
+	private String name;
+	private String img;
+	private int healthPoints;
+	private int attackForce;
+	private String shield;
 	Weapon weapon;
+	
+	//constructeur (new)
+		public Warrior(String scName, String scImg, Integer scHealthPoints, Integer scAttackForce, String scShield, String scWeaponName, Integer scWeaponAttackForce) {
+			this.name = scName;
+			this.healthPoints = scHealthPoints;
+			this.attackForce = scAttackForce;
+			this.shield = scShield;
+			this.weapon = new Weapon(scWeaponName, scWeaponAttackForce) ;
+			
+		}
 
 	// ********** getters **********
 
-	public String getNameWarrior() {
+	public String getName() {
 		return name;
 	}
+	
+	public String getImg() {
+		return img;
+	}
 
-	public int getHealthPointsWarrior() {
+	public int getHealthPoints() {
 		return healthPoints;
 	}
 
-	public int getAttackForceWarrior() {
+	public int getAttackForce() {
 		return attackForce;
 	}
 
-	public String getShieldWarrior() {
+	public String getShield() {
 		return shield;
 	}
 	
 	//retourne l'objet Weapon
-	public Weapon getWeaponWarrior() {
+	public Weapon getWeapon() {
 		return weapon;
 	}
 
 	// ********** setters **********
 
-	public void setNameWarrior(String pName) {
+	public void setName(String pName) {
 		name = pName;
 	}
 
-	public void setHealthPointsWarrior(int pHealthPoints) {
+	public void setImg(String pImg) {
+		img = pImg;
+	}
+	
+	public void setHealthPoints(int pHealthPoints) {
 		healthPoints = pHealthPoints;
 	}
 
-	public void setAttackForceWarrior(int pAttackForce) {
+	public void setAttackForce(int pAttackForce) {
 		attackForce = pAttackForce;
 	}
 
-	public void setShieldWarrior(String pShield) {
+	public void setShield(String pShield) {
 		shield = pShield;
 	}
 	
-	public void setWeaponWarrior(Weapon pWeapon) {
+	public void setWeapon(Weapon pWeapon) {
 		weapon = pWeapon;
 	}
+
 	
-	//constructeur (new)
-	public Warrior(String scName, Integer scHealthPoints, Integer scAttackForce, String scShield, String scWeaponName, Integer scWeaponAttackForce) {
-		this.name = scName;
-		this.healthPoints = scHealthPoints;
-		this.attackForce = scAttackForce;
-		this.shield = scShield;
-		this.weapon = new Weapon(scWeaponName, scWeaponAttackForce) ;
-		
-	}
 }

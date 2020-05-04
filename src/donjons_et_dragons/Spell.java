@@ -1,8 +1,8 @@
 package donjons_et_dragons;
 
 public class Spell {
-	String spellName;
-	Integer spellAttackForce;
+	private String spellName;
+	private Integer spellAttackForce;
 
 	public Spell(String scSpellName, Integer scSpellAttackForce) {
 		this.spellName = scSpellName;
@@ -15,21 +15,21 @@ public class Spell {
 	
 	// ********** getters **********
 
-	public int getSpellAttackForce() {
+	public int getAttackForce() {
 		return spellAttackForce;
 	}
 
-	public String getSpellName() {
+	public String getName() {
 		return spellName;
 	}
 
 	// ********** setters **********
 	
-	public void setSpellName(String pSpellName) {
+	public void setName(String pSpellName) {
 		spellName = pSpellName;
 	}
 	
-	public void setSpellAttackForce(Integer pSpellAttackForce) {
+	public void setAttackForce(Integer pSpellAttackForce) {
 		spellAttackForce = pSpellAttackForce;
 	}
 }
