@@ -1,45 +1,23 @@
 package donjons_et_dragons;
 
-public class Warrior {
-	private String name;
-	private String img;
-	private int healthPoints;
-	private int attackForce;
+public class Warrior extends Character  {
+
 	private String shield;
 	Weapon weapon;
 
 	//constructeur (new)
 	public Warrior(String scName, String scImg, Integer scHealthPoints, Integer scAttackForce, String scShield, String scWeaponName, Integer scWeaponAttackForce) {
-		this.name = scName;
-		this.img = scImg;
-		this.healthPoints = scHealthPoints;
-		this.attackForce = scAttackForce;
+		super(scName, scImg, scHealthPoints, scAttackForce);
 		this.shield = scShield;
 		this.weapon = new Weapon(scWeaponName, scWeaponAttackForce) ;
 
 	}
 
 	public String toString() {
-		return "Nom:" + name + ", Nom de l'image: " + img + ", Nombre de points de vie: " + healthPoints+ ", Force d'attaque: " + attackForce+ ", Nom du Bouclier: " + shield+ ", puis l'arme et sa force: " + weapon;
+		return super.toString() + ", Nom du Bouclier: " + shield+ ", puis l'arme et sa force: " + weapon;
 	}
 
 	// ********** getters **********
-
-	public String getName() {
-		return name;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public int getHealthPoints() {
-		return healthPoints;
-	}
-
-	public int getAttackForce() {
-		return attackForce;
-	}
 
 	public String getShield() {
 		return shield;
@@ -51,22 +29,6 @@ public class Warrior {
 	}
 
 	// ********** setters **********
-
-	public void setName(String pName) {
-		name = pName;
-	}
-
-	public void setImg(String pImg) {
-		img = pImg;
-	}
-
-	public void setHealthPoints(int pHealthPoints) {
-		healthPoints = pHealthPoints;
-	}
-
-	public void setAttackForce(int pAttackForce) {
-		attackForce = pAttackForce;
-	}
 
 	public void setShield(String pShield) {
 		shield = pShield;

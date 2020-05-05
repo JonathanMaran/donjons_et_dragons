@@ -4,13 +4,12 @@ import java.util.*;
 
 public class Game {
 
-
 	//point d'entrée de l'application
 	public static void main(String[] args) {
 
 		// variable permettant de rester dans la boucle de création de perso
 		String createNewCharacter = "oui";
-		Object charTab[] = new Object[10];
+		Character charTab[] = new Character[10];
 
 		int counterChar = 0;
 
@@ -41,7 +40,11 @@ public class Game {
 
 					counterChar++;
 				}
-
+				
+				/*for(int i = 0; i < charTab.length; i++) {
+					System.out.println(charTab[i]);
+				}*/
+				
 				//counter va pouvoir déterminer le nombre de personnages, qui ont été créé,à afficher
 				int counterPrint = 0; 
 				while(counterPrint < counterChar ) {
