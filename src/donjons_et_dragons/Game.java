@@ -40,11 +40,11 @@ public class Game {
 
 					counterChar++;
 				}
-				
+
 				/*for(int i = 0; i < charTab.length; i++) {
 					System.out.println(charTab[i]);
 				}*/
-				
+
 				//counter va pouvoir déterminer le nombre de personnages, qui ont été créé,à afficher
 				int counterPrint = 0; 
 				while(counterPrint < counterChar ) {
@@ -86,60 +86,86 @@ public class Game {
 			System.out.println("Souhaitez-vous créer un nouveau personnage ? oui / non: ");
 			createNewCharacter = sc.nextLine();
 		}
-		
+
 		System.out.println(" ");
 		System.out.println("******************************************");
 		System.out.println("FIN DU JEU");
 		System.out.println("******************************************");
 	}
 
+	// Permet d'avoir une méthode pour obtenir un string
+	private static String questionString(Scanner sc, String question) {
+
+		System.out.println(question);
+		String newAnswer = sc.nextLine();
+		System.out.println(" ");
+		return newAnswer;
+
+	}
+
+	// Permet d'avoir une méthode pour obtenir un int
+	private static int questionInt(Scanner sc, String question, int minValue, int maxValue) {
+
+		while(true) {
+			try {
+
+				System.out.println(question);
+				int newAnswer = sc.nextInt();
+				System.out.println(" ");
+				while(newAnswer < minValue || newAnswer > maxValue) {
+					System.out.println("Veuillez choisir entre " + minValue + " et " + maxValue +":");
+					newAnswer = sc.nextInt();
+					
+				}
+				sc.nextLine();
+				return newAnswer;
+
+			}catch (InputMismatchException e) {
+				System.out.println("Merci de saisir uniquement des chiffres !");
+				sc.nextLine();
+			} 
+
+		}
+	}
+
+	/*private static verifyIfInt() {
+		try {
+
+		}catch {
+
+		}
+	}*/
+
 	private static Magician createMagician(Scanner sc) {
 
-		//choix du nom
-		System.out.println("Maintenant, il va falloir choisir votre nom : ");
-		String scName = sc.nextLine();
-		System.out.println(" ");
 
+		//choix du nom
+		String scName = questionString(sc, "Maintenant, il va falloir choisir votre nom : ");
 		System.out.println("Sympa " + scName + " comme nom !");
 		System.out.println(" ");
 
 		//choix de l'image
-		System.out.println("Choisissez un nom d'image: ");
-		String scImg = sc.nextLine();
-		System.out.println(" ");
-
+		String scImg = questionString(sc, "Choisissez un nom d'image: ");
 		System.out.println("Votre nom d'image est donc: " + scImg);
 		System.out.println(" ");
 
 		//choix du niveau de vie
-		System.out.println(scName + ", vous allez devoir établir votre niveau de vie, qui se situera obligatoirement entre 3 et 6 : ");
-		Integer scHealthPoints = sc.nextInt();
-		while(scHealthPoints < 3 || scHealthPoints > 6 ) {
-			System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre 3 et 6 : ");
-			scHealthPoints = sc.nextInt();
-		}
+		int scHealthPoints = questionInt(sc, "Vous allez devoir établir votre niveau de vie, qui se situera obligatoirement entre 3 et 6 :", 3, 6);
 		System.out.println("Votre niveau de vie est donc de " + scHealthPoints + " !");
 		System.out.println(" ");
 
 		//choisir force attaque 
-		System.out.println("C'est bien beau d'avoir des points de vie, mais il va falloir se battre ! choisissez votre force d'attaque, entre 8 et 15 : ");
-		Integer scAttackForce = sc.nextInt();
-		while(scAttackForce < 8 || scAttackForce > 15) {
-			System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 8 et 15 : ");
-			scAttackForce = sc.nextInt();
-		}
+		int scAttackForce = questionInt(sc, "C'est bien beau d'avoir des points de vie, mais il va falloir se battre ! choisissez votre force d'attaque, entre 8 et 15 : ", 8, 15);
 		System.out.println("Très bien, partons sur " + scAttackForce + " en force d'attaque !");
 		System.out.println(" ");
 
-		// vide la lignesans demande de saisie (à faire après un nextInt)
+		// vide la ligne sans demande de saisie (à faire après un nextInt)
 		sc.nextLine();
 
 		//choisir son sort
-		System.out.println("J'ai confiance en votre force, mais un sort vous sera très utile ! choisissez un nom de sort: ");
-		String scSpellName = sc.next();
-		System.out.println("Choisissez sa puissance: ");
-		Integer scSpellAttackForce = sc.nextInt();
-		System.out.println(scSpellName + " c'est un super nom de sort ! et que dire de sa puissance estimée à " + scSpellAttackForce + " !");
+		String scSpellName = questionString(sc, "J'ai confiance en votre force, mais un sort vous sera très utile ! choisissez un nom de sort: ");
+		int scSpellAttackForce = questionInt(sc, "Choisissez sa puissance entre 5 et 20: ", 5, 20);
+		System.out.println(scSpellName + " c'est un super nom de sort ! Et que dire de sa puissance de " + scSpellAttackForce + " !");
 		System.out.println(" ");
 		sc.nextLine();
 
@@ -153,121 +179,118 @@ public class Game {
 
 		System.out.println(" ");
 
+
 		System.out.println("Souhaitez-vous afficher votre personnage créé ? oui / non: ");
 		String getPlayer = sc.nextLine();
 		if(getPlayer.equalsIgnoreCase("oui")) {
-			System.out.println(" ");
-			System.out.println("Nom: " + magician.getName());
-			System.out.println("Nom de l'image: " + magician.getImg());
-			System.out.println("Points de vie: " + magician.getHealthPoints());
-			System.out.println("Force d'attaque: " + magician.getAttackForce());
-			System.out.println("Nom du philtre: " + magician.getPhilter());
-			System.out.println("Nom du sort et sa force: " + magician.getSpell());
 
-			System.out.println(" ");
+			// afficher un personnage
+
+			printChar(magician);
+			// le sort et le philtre ne sont pas dans la méthode car ils sont propre aux magiciens
+			System.out.println("Nom du sort et sa force: " + magician.getSpell());
+			System.out.println("Nom du philtre: " + magician.getPhilter());
 
 			System.out.println("Souhaitez-vous modifier votre personnage ? oui / non:");
 			String setPlayer = sc.nextLine();
 			if(setPlayer.equalsIgnoreCase("oui")) {
+
+				// modifier un personnage
+
+				modifyChar(sc, magician, 3, 6, 8, 15);
+				// le sort et le philtre ne sont pas dans la méthode car ils sont propre aux magiciens
+				System.out.println("Nouveau nom de sort:");
+				magician.setName(sc.nextLine());
 				System.out.println(" ");
-				System.out.println("Par ici les modifications !");
-				System.out.println(" ");
-				System.out.println("Nouveau nom:");
-				magician.setName(sc.nextLine());  
-				System.out.println(" ");
-				System.out.println("Nouveau nom d'image:");
-				magician.setImg(sc.nextLine());  
-				System.out.println(" ");
-				System.out.println("Nouveaux points de vie entre 3 et 6:");
-				magician.setHealthPoints(sc.nextInt());
-				System.out.println(" ");
-				while(magician.getHealthPoints() < 3 || magician.getHealthPoints() > 6 ) {
-					System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre 3 et 6 : ");
-					magician.setHealthPoints(sc.nextInt());
-					System.out.println(" ");
-				}
-				System.out.println("Nouvelle force d'attaque entre 8 et 15:");
+				System.out.println("Nouvelle puissance du sort:");
 				magician.setAttackForce(sc.nextInt());
 				System.out.println(" ");
-				while(magician.getAttackForce() < 8 || magician.getAttackForce() > 15 ) {
-					System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 8 et 15 : ");
-					magician.setAttackForce(sc.nextInt());
-					System.out.println(" ");
-				}
 				sc.nextLine();
 				System.out.println("Nouveau nom de philtre:");
 				magician.setPhilter(sc.nextLine());
 				System.out.println(" ");
-				System.out.println("Nouveau nom de sort:");
-				magician.spell.setName(sc.nextLine());
-				System.out.println(" ");
-				System.out.println("Nouvelle puissance du sort:");
-				magician.spell.setAttackForce(sc.nextInt());
-				System.out.println(" ");
 
-				System.out.println("Voici votre nouveau personnage mis à jour:");
-				System.out.println(" ");
-				System.out.println("Nom: " + magician.getName());
-				System.out.println("Nom de l'image: " + magician.getImg());
-				System.out.println("Points de vie: " + magician.getHealthPoints());
-				System.out.println("Force d'attaque: " + magician.getAttackForce());
-				System.out.println("Nom du philtre: " + magician.getPhilter());
+				// afficher le personnage modifié
+
+				printChar(magician);
+				// le sort et le philtre ne sont pas dans la méthode car ils sont propre aux magiciens
 				System.out.println("Nom du sort et sa force: " + magician.getSpell());
+				System.out.println("Nom du philtre: " + magician.getPhilter());
+
 			}
 		} else if(getPlayer.equalsIgnoreCase("non")){
 			System.out.println("Souhaitez-vous modifier votre personnage ? oui / non:");
 			String setPlayer = sc.nextLine();
 			if(setPlayer.equalsIgnoreCase("oui")) {
+
+				// modifier un personnage
+
+				modifyChar(sc, magician, 3, 6, 8, 15);
+				System.out.println("Nouveau nom de sort:");
+				magician.setName(sc.nextLine());
 				System.out.println(" ");
-				System.out.println("Par ici les modifications !");
-				System.out.println(" ");
-				System.out.println("Nouveau nom:");
-				magician.setName(sc.nextLine());  
-				System.out.println(" ");
-				System.out.println("Nouveau nom d'image:");
-				magician.setImg(sc.nextLine());  
-				System.out.println(" ");
-				System.out.println("Nouveaux points de vie entre 3 et 6:");
-				magician.setHealthPoints(sc.nextInt());
-				System.out.println(" ");
-				while(magician.getHealthPoints() < 3 || magician.getHealthPoints() > 6 ) {
-					System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre 3 et 6 : ");
-					magician.setHealthPoints(sc.nextInt());
-					System.out.println(" ");
-				}
-				System.out.println("Nouvelle force d'attaque entre 8 et 15:");
+				System.out.println("Nouvelle puissance du sort:");
 				magician.setAttackForce(sc.nextInt());
 				System.out.println(" ");
-				while(magician.getAttackForce() < 8 || magician.getAttackForce() > 15 ) {
-					System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 8 et 15 : ");
-					magician.setAttackForce(sc.nextInt());
-					System.out.println(" ");
-				}
 				sc.nextLine();
 				System.out.println("Nouveau nom de philtre:");
 				magician.setPhilter(sc.nextLine());
 				System.out.println(" ");
-				System.out.println("Nouveau nom de sort:");
-				magician.spell.setName(sc.nextLine());
-				System.out.println(" ");
-				System.out.println("Nouvelle puissance du sort:");
-				magician.spell.setAttackForce(sc.nextInt());
-				System.out.println(" ");
 
-				System.out.println("Voici votre nouveau personnage mis à jour:");
-				System.out.println(" ");
-				System.out.println("Nom: " + magician.getName());
-				System.out.println("Nom de l'image: " + magician.getImg());
-				System.out.println("Points de vie: " + magician.getHealthPoints());
-				System.out.println("Force d'attaque: " + magician.getAttackForce());
-				System.out.println("Nom du philtre: " + magician.getPhilter());
+				// afficher le personnage modifié
+
+				printChar(magician);
 				System.out.println("Nom du sort et sa force: " + magician.getSpell());
+				System.out.println("Nom du philtre: " + magician.getPhilter());
 			} 
 
 		}
-		
+
 		return magician;
-		
+
+
+
+
+
+	}
+
+	private static void modifyChar(Scanner sc, Character character, int healthPointsMin, int healthPointsMax, int attackForceMin, int attackForceMax) {
+		System.out.println(" ");
+		System.out.println("Par ici les modifications !");
+		System.out.println(" ");
+		System.out.println("Nouveau nom:");
+		character.setName(sc.nextLine());  
+		System.out.println(" ");
+		System.out.println("Nouveau nom d'image:");
+		character.setImg(sc.nextLine());  
+		System.out.println(" ");
+		System.out.println("Nouveaux points de vie entre " + healthPointsMin + " et " + healthPointsMax + ":");
+		character.setHealthPoints(sc.nextInt());
+		System.out.println(" ");
+		while(character.getHealthPoints() < 3 || character.getHealthPoints() > 6 ) {
+			System.out.println("Euh non, veuillez choisir le niveau de vie de votre personnage, entre " + healthPointsMin + " et " + healthPointsMax + ":");
+			character.setHealthPoints(sc.nextInt());
+			System.out.println(" ");
+		}
+		System.out.println("Nouvelle force d'attaque entre " + attackForceMin + " et " + attackForceMax + ":");
+		character.setAttackForce(sc.nextInt());
+		System.out.println(" ");
+		while(character.getAttackForce() < 8 || character.getAttackForce() > 15 ) {
+			System.out.println("Bien tenté mais non...Veuillez choisir la force d'attaque de votre personnage entre 8 et 15 : ");
+			character.setAttackForce(sc.nextInt());
+			System.out.println(" ");
+		}
+		sc.nextLine();
+	}
+
+
+	private static void printChar(Character character) {
+		System.out.println("Voici votre personnage:");
+		System.out.println(" ");
+		System.out.println("Nom: " + character.getName());
+		System.out.println("Nom de l'image: " + character.getImg());
+		System.out.println("Points de vie: " + character.getHealthPoints());
+		System.out.println("Force d'attaque: " + character.getAttackForce());		
 	}
 
 
@@ -346,6 +369,7 @@ public class Game {
 			System.out.println("Nom de l'arme et sa force: " + warrior.getWeapon());
 
 			System.out.println(" ");
+
 
 			System.out.println("Souhaitez-vous modifier votre personnage ? oui / non:");
 			String setPlayer = sc.nextLine();
