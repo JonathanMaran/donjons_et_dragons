@@ -105,8 +105,10 @@ public class Game {
 
 	// Permet d'avoir une méthode pour obtenir un int
 	private static int questionInt(Scanner sc, String question, int minValue, int maxValue) {
-
+		
+		// while de façon infini jusqu'à trouver un return 
 		while(true) {
+			// gérer les exceptions afin de n'avoir que des int
 			try {
 
 				System.out.println(question);
@@ -115,9 +117,10 @@ public class Game {
 				while(newAnswer < minValue || newAnswer > maxValue) {
 					System.out.println("Veuillez choisir entre " + minValue + " et " + maxValue +":");
 					newAnswer = sc.nextInt();
-					
+
 				}
 				sc.nextLine();
+				//return permet de casser le while 
 				return newAnswer;
 
 			}catch (InputMismatchException e) {
