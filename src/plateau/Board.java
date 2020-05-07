@@ -2,25 +2,47 @@ package plateau;
 
 import java.util.ArrayList;
 
+/**
+ * La classe Board va permettre la création des cases du plateau ainsi que l'affichage de ce plateau.
+ * 
+ * @author jonathanmrn
+ *
+ */
+
 public class Board extends SkillCase {
 
-	//permet de puvoir par la suite définir la taille de mon ArrayList
+ /**
+  * Mon ArrayList n'ayant pas de taille, je choisi d'en définir une avec la constante TAB_SIZE
+  * 
+  */
 	public static final int TAB_SIZE = 15;
 
-	//permet d'afficher chaque case créé
+	/**
+	 * printCase va permettre d'afficher chaque case créé
+	 * @param cases
+	 * 		La ArrayList cases
+	 */
 	public void printCase(ArrayList<String> cases) {
 		for(int i = 0; i < cases.size(); i++) {
 			System.out.println(cases.get(i));
 		}
 	}
 
-	// méthoe permettant de créer mes cases 
+	/**
+	 * createCases est une méthode permettant de créer les cases de mon jeu 
+	 * @return
+	 * 		elle retourne une ArrayList de String nommée cases.
+	 */
 	public ArrayList<String> createCases() {
 		
-		// création de mon arraylist dans ma variable cases
+		/**
+		 * création de mon ArrayList dans ma variable cases 
+		 */
 		ArrayList<String> cases = new ArrayList<String>();
 
-		// boucle permettant la création de chacune des cases de mon jeu, de manière aléatoire selon 3 critères 
+		/**
+		 * boucle for permettant la création de chacune des cases de mon jeu, de manière aléatoire.
+		 */
 		for(int i = 0; i < TAB_SIZE; i++) {
 			
 			int random = (int) (Math.random()*(3));
